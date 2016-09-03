@@ -8,6 +8,7 @@ import urllib
 import ftplib
 import ConfigParser
 import os, sys
+import time
 
 #initialize Config Parser to get correct settings
 conf = ConfigParser.RawConfigParser()
@@ -23,18 +24,21 @@ ftp_url = conf.get('Settings','ftp_url')
 username = conf.get('Settings','username')
 password = conf.get('Settings','password')
 
+print "Starting Webcam Upload"
 
 #connect to ftp server
 f = urllib.urlopen(webcam_url)
 s = ftplib.FTP()
+
 s.connect(ftp_url,21)
 s.login(username, password)
 
 #upload image
 s.storbinary('STOR image.jpeg', f)
+print "END"
 
 #give uploader time to upload, helps with poor internet connection
-time.sleep(120)
+time.sleep(30)
 
 #close connection with ftp server, and close local url
 f.close()
