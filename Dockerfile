@@ -4,7 +4,7 @@
 #
 # build via 'docker build -t WXpiimage'
 #
-# run -dit --name wxpi --privileged -p 22 -v /media/WXdisk:/media/WXdisk  --restart always WXpiimage
+# docker run -dit --name wxpi --privileged -p 22 -v /media/WXdisk:/media/WXdisk  --restart always WXpiimage
 #
 # to access/debug this container:
 #     docker exec -it wxpi bash
@@ -57,6 +57,8 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 ENV WEEWX_VERSION weewx_3.5.0-1_all.deb
 
+RUN export DEBIAN_FRONTEND=noninteractive
+
 RUN apt update && apt install -y sqlite3 wget curl procps cron gcc nano \
         python-configobj python-cheetah python-imaging python-serial python-usb python-dev \
         python-pip \
@@ -81,6 +83,7 @@ RUN wget http://lancet.mit.edu/mwall/projects/weather/releases/weewx-forecast-3.
 RUN wee_extension --install /tmp/forecast.tgz
 
 #copy correct settings
+
 RUN rm /etc/weewx/weewx.conf
 COPY weewx.conf /etc/weewx/
 
