@@ -2,11 +2,7 @@
 
 This small set of files lets you spin up a working Docker instance of weewx on top of Raspbian within just a few minutes.
 
-You can easily get Docker for Raspberry Pi by using [HypriotOS](http://blog.hypriot.com/).  This Docker repo may be easily
-
-modified to work with Resin.io, but hopefully they will better support USB storage in the future.  I have the Weather databases saved
-
-in the volume /media/WXdisk.  You will have to link the volume on your host machine to the container for this to work properly.
+You can easily get Docker for Raspberry Pi by using [HypriotOS](http://blog.hypriot.com/).  This Docker repo may be easily modified to work with Resin.io, but hopefully they will better support USB storage in the future.  I have the Weather databases saved in the volume /media/WXdisk.  You will have to link the volume on your host machine to the container for this to work properly.
 
 The root password is 'root' which you should of course change to something suitably obscure for you.
 
@@ -19,9 +15,9 @@ Yes, I called the resulting image 'rpi-weewx' :-)
     copy the contents of this repo into that directory
 
 ### modify files for your configuration
-    * Dockerfile —if you would like to enable webcam upload
-    * weewx.conf —Weather station settings
-    * wunderground_upload_cam.conf —if you would like to use webcam uploader
+* Dockerfile —if you would like to enable webcam upload
+* weewx.conf —Weather station settings
+* wunderground_upload_cam.conf —if you would like to use webcam uploader
 
 ### build the image with the desired image tag name
     docker build -t WXpiimage .
