@@ -29,7 +29,7 @@
 #-------------------------------------------------------
 
 FROM resin/rpi-raspbian:jessie
-MAINTAINER Drew McCalmont "dmmccalmont@gmail.com"
+MAINTAINER D. McCalmont "dmmccalmont@gmail.com"
 EXPOSE 22
 
 # DANGER WILL ROBINSON !!!!
@@ -74,9 +74,11 @@ RUN wget http://lancet.mit.edu/mwall/projects/weather/releases/weewx-exfoliation
     -O /tmp/exfoliation.tgz
 RUN wee_extension --install /tmp/exfoliation.tgz
 
+## Homepage with webcam -- uncomment if you would like homepage with webcam image
+
 #replace index page with my format that shows webcam
-RUN rm /etc/weewx/skins/exfoliation/index.html.tmpl
-COPY index.html.tmpl /etc/weewx/skins/exfoliation/
+#RUN rm /etc/weewx/skins/exfoliation/index.html.tmpl
+#COPY index.html.tmpl /etc/weewx/skins/exfoliation/
 
 #forecast module
 RUN wget http://lancet.mit.edu/mwall/projects/weather/releases/weewx-forecast-3.0.8.tgz -O /tmp/forecast.tgz
@@ -87,10 +89,11 @@ RUN wee_extension --install /tmp/forecast.tgz
 RUN rm /etc/weewx/weewx.conf
 COPY weewx.conf /etc/weewx/
 
-#webcam upload
-RUN mkdir /home/wunderground_upload_cam
-COPY wunderground_upload_cam /home/wunderground_upload_cam
-RUN crontab -l | { cat; echo "*/2 * * * * python /home/wunderground_upload_cam/wunderground_upload_cam.py"; } | crontab -
+#### webcam upload --Uncomment if you would like to use webcam uploader
+
+#RUN mkdir /home/wunderground_upload_cam
+#COPY wunderground_upload_cam /home/wunderground_upload_cam
+#RUN crontab -l | { cat; echo "*/2 * * * * python /home/wunderground_upload_cam/wunderground_upload_cam.py"; } | crontab -
 
 # call supervisord as our container process to run
 CMD ["/usr/bin/supervisord"]
