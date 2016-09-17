@@ -15,7 +15,7 @@
 # and permits root logins over ssh for debugging
 #
 # last modified:
-#     2016-0902 dmmccalmont@gmail.com - updated for raspbian
+#     2016-0902 Drew M - updated for raspbian
 #     2016-0505 - update to 3.5.0
 #     2015-1211 - install pyephem, refactor to reduce layers
 #     2015-1206 - update to 3.3.1
@@ -29,7 +29,7 @@
 #-------------------------------------------------------
 
 FROM resin/rpi-raspbian:jessie
-MAINTAINER D. McCalmont "dmmccalmont@gmail.com"
+MAINTAINER Drew M
 EXPOSE 22
 
 # DANGER WILL ROBINSON !!!!
